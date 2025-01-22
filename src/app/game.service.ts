@@ -15,7 +15,7 @@ export class GameService {
   // BehaviorSubject to hold the winning line (array of indices or null if no winner yet)
   private readonly winningLineSubject = new BehaviorSubject<number[] | null>(null);
 
-   // Observable for the board state
+   // Observable for the board state, that mean it emits values to its subscribers
   board$ = this.boardSubject.asObservable();
    // Observable for whose turn it is
   xIsNext$ = this.xIsNextSubject.asObservable();
