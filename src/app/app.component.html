@@ -1,7 +1,16 @@
 <div class="game-container">
     <h1>Tic Tac Toe</h1>
     
+        <!-- 
+      winner$ | async: Subscribes to the winner$ Observable and waits for its value.
+      as winner: Assigns the emitted value of winner$ to the winner variable,
+       which is scoped to the current *ngIf block.
+       Use of winner: Inside this block,
+        you can refer to the winner variable to display its value (e.g., Winner: {{ winner }}).
+      -->
     <div class="status">
+      <!-- async as winner:
+       winner is a variable and you can call it whatever you want -->
       <ng-container *ngIf="winner$ | async as winner; else nextPlayer">
         Winner: {{ winner }}
       </ng-container>
@@ -11,6 +20,17 @@
     </div>
 
     <div class="board">
+          <!--the async pipe subscribes to the board$ observable and gets its latest value.
+    and automatically update the template with the latest emitted value.
+    let value of board$ | async; this assigns each value from the board$ to the value variable.
+    *ngFor directive loops through the values of the board$ observable to create each square.
+    let i = index this assigns the current index of the loop to the i variable.
+    [value]="value" this binds the value variable to the value input property of the <app-square> component.
+     [isWinning]="isWinningSquare(i)" this binds the result of the isWinningsquare(!) method
+     to the isWinning input input property of the <app-square> component, this indicates if the
+      square is part of a winning combination.
+      clicking a square triggers the makeMove(!) method, which handles the player's move.
+        -->
       <app-square
         *ngFor="let value of board$ | async; let i = index"
         [value]="value"

@@ -97,6 +97,7 @@ export class GameService {
           let x = 5;
 
       */
+     //board[a] check if the cell at index a is not null that mean it verifies that the cell is occupied by X or O.
       if (board[a] && board[a] === board[b] && board[a] === board[c]) {
         this.winnerSubject.next(board[a]);// Notify subscribers of the winner
         this.winningLineSubject.next(line);// Notify subscribers of the winning line
@@ -128,7 +129,7 @@ export class GameService {
         console.log(string.includes("world")); // true
         console.log(string.includes("foo")); // false
     */
-  // Check if the board is full and there is no winner
+  // Check if the board is full
     if (!board.includes(null)) {
       this.winnerSubject.next(null);// Notify subscribers that the game is a draw
       this.winningLineSubject.next(null);// Notify subscribers that there is no winning line
