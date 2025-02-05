@@ -13,6 +13,16 @@ export class GameService {
    // BehaviorSubject to hold the winner ('X', 'O', or null if no winner yet)
   private readonly winnerSubject = new BehaviorSubject<'X' | 'O' | null>(null);
   // BehaviorSubject to hold the winning line (array of indices or null if no winner yet)
+
+  
+  //number[] is same as Array<number>
+  /*if you want to define an array with exactly 2 number you should use a tuple:
+  Example: c: [number, number] = [1,2];
+  array of numbers:
+  c:number[] = [];
+  or
+  c: Array<number> = [];
+  */
   private readonly winningLineSubject = new BehaviorSubject<number[] | null>(null);
 
    // Observable for the board state, that mean it emits values to its subscribers
@@ -64,6 +74,20 @@ export class GameService {
     this.winnerSubject.next(null);// Clear the winner
     this.winningLineSubject.next(null);// Clear the winning line
   }
+
+/*
+board: Array<'X' | 'O' | null>
+above code define board as a regular array that can have any number of elements or can be empty array.
+
+board: ['X' | 'O' | null]
+this define board as a tuple type with exactly one element,
+that mean board can have x or o or null as value and it can not be empty.
+checkWinner(['X']);  // ✅ Valid
+checkWinner(['O']);  // ✅ Valid
+checkWinner([null]); // ✅ Valid
+checkWinner(['X', 'O']); // ❌ Invalid (too many elements)
+checkWinner([]); // ❌ Invalid (empty array
+*/
 
   private checkWinner(board: Array<'X' | 'O' | null>): void {
     // Define all possible winning combinations
@@ -129,6 +153,22 @@ export class GameService {
         console.log(string.includes("world")); // true
         console.log(string.includes("foo")); // false
     */
+   /*
+   if(board !==null)
+   this condition is wrong because it
+   Checks whether board itself is not null.
+  This does not check whether board contains null values, it only ensures that board is assigned some array value.
+  example: let board3 = ['X', 'O', null];   // ✅ Condition is TRUE (board is an array)
+            let board4 = null;               // ❌ Condition is FALSE (board itself is null)
+
+    if(!board.includes(null))
+    this is the right condition because:
+    Checks if null is not present anywhere inside the board array.
+    This ensures that all elements in the board array are either 'X' or 'O', meaning the board is completely filled.
+    example: const board1 = ['X', 'O', 'X'];   // ✅ Condition is TRUE (no nulls)
+             const board2 = ['X', null, 'O'];  // ❌ Condition is FALSE (null exists)
+
+   */
   // Check if the board is full
     if (!board.includes(null)) {
       this.winnerSubject.next(null);// Notify subscribers that the game is a draw
