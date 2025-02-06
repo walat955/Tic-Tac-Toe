@@ -91,6 +91,17 @@ checkWinner([]); // ❌ Invalid (empty array
 
   private checkWinner(board: Array<'X' | 'O' | null>): void {
     // Define all possible winning combinations
+    /**
+     * we can write line like this 2:
+     * const lines: number[][] =.....    // (an array of arrays of numbers).
+     * this is same as const lines = ... // Here, TypeScript infers the type as number[][]
+     * or
+     * const lines : any[][] = ....
+     * or
+     * const lines: Array<any> = ...
+     * or
+     * const lines: Array<number[]> = ...
+     */
     const lines = [
       [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
       [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
